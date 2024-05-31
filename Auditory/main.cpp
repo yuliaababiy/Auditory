@@ -10,19 +10,20 @@ using namespace std;
 template <typename T>
 void displayAuditory(vector<Auditory<T>*>& auditories)
 {
-for (auto auditory : auditories)
-{
-	auditory->display();
-}
-auditories.clear();
+	for (auto auditory : auditories)
+	{
+		auditory->display();
+	}
+	auditories.clear();
 }
 
 template <typename T>
 void saveToFile(vector<Auditory<T>*>& auditories, string filename)
 {
-	ofstream file(filename)
+	ofstream file(filename);
+	for(auto a:auditories)
 	{
-		auditory->displayIntoFile(file);
+		a->displayIntoFile(file);
 	}
 	auditories.clear();
 }
@@ -31,20 +32,21 @@ template <typename T>
 void loadFromFile(vector<Auditory<T>*>& auditories, string filename)
 {
 	ifstream file(filename);
-		int number, area, twoDesk, threeDesk;
-		string nameEquipment;
-		sting type;
-		while (file >> type >> number >> area >> twoDesk >> threeDesk >> nameEquipment)
+	int number, area, twoDesk, threeDesk;
+	string nameEquipment;
+	string type;
+	while (file >> type >> number >> area >> twoDesk >> threeDesk)
+	{
+		if (type == "Auditory")
 		{
-			if (type == Auditory)
-			{
-				auditories.push_back(new Auditory(number, area, twoDesk, threeDesk));
-			}
-			else if (type == MultAuditory)
-			{
-				auditories.push_back(new MultAuditory(number, area, twoDesk, threeDesk, nameEquipment));
-			}
-		}	
+			auditories.push_back(new Auditory<T>(number, area, twoDesk, threeDesk));
+		}
+		else if (type == "MultAuditory")
+		{
+			file >> nameEquipment;
+			auditories.push_back(new MultAuditory<T>(number, area, twoDesk, threeDesk, nameEquipment));
+		}
+	}
 }
 int main()
 {
@@ -75,47 +77,46 @@ int main()
 			string nameEquipment;
 			string type;
 			cout << "Enter type auditory: ";
-				cin >> type;
-				if (type == " Auditory ")
-				{
-					cout << "Enter number: ";
-					cin >> number;
-					cout << "Enter area: ";
-					cin >> area;
-					cout << "Enter twoDesk: ";
-					cin >> twoDesk;
-					cout << "Enter threeDesk: ";
-					cin >> threeDesk;
-					Auditory<int>* a = new Auditory<int>(number, area, twoDesk, threeDesk);
-					a->saveWithSpaces(file);
-				}
-				if (type == " MultAuditory ")
-				{
-					cout << "Enter number: ";
-					cin >> number;
-					cout << "Enter area: ";
-					cin >> area;
-					cout << "Enter twoDesk: ";
-					cin >> twoDesk;
-					cout << "Enter threeDesk: ";
-					cin >> threeDesk;
-					cout << "Enter nameEquipment: ";
-					cin >> nameEquipment;
-					MultAuditory<int>* m = new MultAuditory<int>(number, area, twoDesk, threeDesk, nameEquipment);
-					m->saveWithSpaces(file);
-				}
-				else
-				{
-					cout << "You entered wrong!" << endl;
-					break;
-				}
+			cin >> type;
+			if (type == "Auditory")
+			{
+				cout << "Enter number: ";
+				cin >> number;
+				cout << "Enter area: ";
+				cin >> area;
+				cout << "Enter twoDesk: ";
+				cin >> twoDesk;
+				cout << "Enter threeDesk: ";
+				cin >> threeDesk;
+				Auditory<int>* a = new Auditory<int>(number, area, twoDesk, threeDesk);
+				a->saveWithSpaces(file);
+			}
+			if (type == "MultAuditory")
+			{
+				cout << "Enter number: ";
+				cin >> number;
+				cout << "Enter area: ";
+				cin >> area;
+				cout << "Enter twoDesk: ";
+				cin >> twoDesk;
+				cout << "Enter threeDesk: ";
+				cin >> threeDesk;
+				cout << "Enter nameEquipment: ";
+				cin >> nameEquipment;
+				MultAuditory<int>* m = new MultAuditory<int>(number, area, twoDesk, threeDesk, nameEquipment);
+				m->saveWithSpaces(file);
+			}
+			else
+			{
+				cout << "You entered wrong!" << endl;
+				break;
+			}
 		}
 		else if (choice == 3)
 		{
 			loadFromFile(auditories, "input.txt");
 			loadFromFile(auditories, "output.txt");
 		}
-		
 		//Find the Floor
 		else if (choice == 4)
 		{
@@ -181,10 +182,14 @@ int main()
 			}
 			cout << "Overall area is: " << overallArea << endl;
 		}
-		
+		else if (choice == 9)
+		{
+			break;
+		}
+
 	}
 
-	
+
 }
 
 

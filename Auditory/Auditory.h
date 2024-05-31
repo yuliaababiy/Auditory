@@ -16,10 +16,10 @@ public:
 	virtual void displayIntoFile(ostream& out);
 	virtual void display();
 	virtual void saveWithSpaces(ostream& out);
-	getNumberPlace();
-	getNumber();
-	getArea();
-	getFloor();
+	int getNumberPlace();
+	int getNumber();
+	int getArea();
+	int getFloor();
 };
 
 #endif // ! AUDITORY_H

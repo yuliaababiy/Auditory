@@ -7,19 +7,19 @@ Auditory<T> :: Auditory<T>(int number, T area, int twoDesk, int threeDesk)
 template <typename T>
 void Auditory<T> :: displayIntoFile(ostream& out)
 {
-	out << " Number: " << number << " Area: " << area << " TwoDesk: " << twoDesk << " Three Desk: " << threeDesk << endl;
+	out << "Number: " << number << " Area: " << area << " TwoDesk: " << twoDesk << " Three Desk: " << threeDesk << endl;
 }
 
 template <typename T>
 void Auditory<T> :: display()
 {
-	cout << " Number: " << number << " Area: " << area << " TwoDesk: " << twoDesk << " Three Desk: " << threeDesk << endl;
+	cout << "Number: " << number << " Area: " << area << " TwoDesk: " << twoDesk << " Three Desk: " << threeDesk << endl;
 }
 
 template<typename T>
 void Auditory<T>::saveWithSpaces(ostream& out)
 {
-	out << " Number: " << number << " Area: " << area << " TwoDesk: " << twoDesk << " Three Desk: " << threeDesk << endl;
+	out << "Auditory " << number << " " << area << " " << twoDesk << " " << threeDesk << endl;
 }
 
 template<typename T>
@@ -39,5 +39,14 @@ int Auditory<T> ::getFloor()
 {
 	return number / 100;
 }
+
+template <typename T>
+int Auditory<T> ::getNumberPlace()
+{
+	return twoDesk * 2 + threeDesk * 3;
+}
+
+template class Auditory<int>;
+template class Auditory <double>;
 
 
