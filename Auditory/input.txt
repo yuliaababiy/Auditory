@@ -1,0 +1,3 @@
+Auditory 201 30 5 3
+Auditory 305 20 2 2 
+MultAuditory 107 40 4 3 Computer_Proektor_TV
